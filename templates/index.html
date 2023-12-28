@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Manager</title>
+    <link href="../static/css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Property Manager</h1>
+    <form action="/filter_by_location" method="post">
+        <label for="location">Location:</label>
+        <input type="text" name="location" id="location" required>
+        <button type="submit">Filter by Location</button>
+    </form>
+
+    <form action="/filter_by_price" method="post" onsubmit="return validatePriceForm()">
+        <label for="min_price">Min Price:</label>
+        <input type="number" name="min_price" id="min_price" required value="0">
+
+        <label for="max_price">Max Price:</label>
+        <input type="number" name="max_price" id="max_price">
+
+        <button type="submit">Filter by Price</button>
+    </form>
+
+    <form action="/filter_by_square_footage" method="post" onsubmit="return validateSquareFootageForm()">
+        <label for="min_square_footage">Min Square Footage:</label>
+        <input type="number" name="min_square_footage" id="min_square_footage" required value="0">
+
+        <label for="max_square_footage">Max Square Footage:</label>
+        <input type="number" name="max_square_footage" id="max_square_footage">
+
+        <button type="submit">Filter by Square Footage</button>
+    </form>
+
+
+    <form action="/filter_by_property_type" method="post">
+        <label for="property_type">Property Type:</label>
+        <select name="property_type" id="property_type">
+            <option value="House">House</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Commercial Space">Commercial Space</option>
+        </select>
+        <button type="submit">Filter by Property Type</button>
+    </form>
+
+    <form action="/sort" method="post">
+        <label for="sorting_attribute">Sort by:</label>
+        <select name="sorting_attribute" id="sorting_attribute">
+            <option value="price">Price</option>
+            <option value="square_footage">Square footage</option>
+        </select>
+        <label for="sorting_type">Sort Type:</label>
+        <select name="sorting_type" id="sorting_type">
+            <option value="ascending">Ascending</option>
+            <option value="descending">Descending</option>
+        </select>
+        <button type="submit">Sort Properties</button>
+    </form>
+    <a href="{{ url_for('homepage') }}">
+        <button>Clear Filter</button>
+    </a>
+
+    <h2>Properties ({{ info }}):</h2>
+    <form action="/save_current_selection" method="post">
+        <div class="property-grid">
+            {% for prop in properties %}
+                <div class="property">
+                    <h3>
+                        <input type="checkbox" name="selected_properties" value="{{ prop.get_id() }}">
+                        {{ prop.get_name() }}
+                    </h3>
+                    <ul>
+                        {% for key, value in prop.to_dict().items() %}
+                            {% if loop.index > 1 %}
+                                <li><strong>{{ key.replace("_", " ").title() }}:</strong> {{ value }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit">Save Selected Properties to JSON</button>
+    </form>
+</body>
+</html>
+<script>
+    function validatePriceForm() {
+        let minPrice = parseInt(document.getElementById("min_price").value);
+        let maxPrice = parseInt(document.getElementById("max_price").value);
+
+        if (minPrice < 0 || maxPrice < 0 ){
+            alert("Prices cannot be negative!");
+            return false;
+        }
+
+        if (minPrice > maxPrice) {
+            alert("Min Price cannot be larger than Max Price!");
+            return false;
+        }
+
+        return true;
+    }
+
+     function validateSquareFootageForm() {
+        let minSquareFootage = parseInt(document.getElementById("min_square_footage").value);
+        let maxSquareFootage = parseInt(document.getElementById("max_square_footage").value);
+
+         if (minSquareFootage < 0 || maxSquareFootage < 0 ){
+            alert("Square footage cannot be negative!");
+            return false;
+        }
+
+        if (minSquareFootage > maxSquareFootage) {
+            alert("Min Square Footage cannot be larger than Max Square Footage!");
+            return false;
+        }
+
+        return true;
+    }
+</script>

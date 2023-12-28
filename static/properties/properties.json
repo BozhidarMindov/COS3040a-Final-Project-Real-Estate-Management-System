@@ -1,0 +1,58 @@
+[
+    {
+        "name": "President Apartment",
+        "property_type": "Apartment",
+        "location": "Sofia",
+        "price": 2000000,
+        "square_footage": 1000,
+        "num_of_bedrooms": 2,
+        "num_of_bathrooms": 2,
+        "floor_number": 10
+    },
+    {
+        "name": "President Apartment 2",
+        "property_type": "Apartment",
+        "location": "Sofia",
+        "price": 180000,
+        "square_footage": 1200,
+        "num_of_bedrooms": 2,
+        "num_of_bathrooms": 2,
+        "floor_number": 9
+    },
+    {
+        "name": "Lake House",
+        "property_type": "House",
+        "location": "Burgas",
+        "price": 350000,
+        "square_footage": 4000,
+        "num_of_bedrooms": 4,
+        "num_of_bathrooms": 3,
+        "num_of_floors": 2
+    },
+    {
+        "name": "Suburban Office Space",
+        "property_type": "Commercial Space",
+        "location": "Plovdiv",
+        "price": 120000,
+        "square_footage": 1500,
+        "business_type": "Healthcare"
+    },
+    {
+        "name": "Free shop",
+        "property_type": "Commercial Space",
+        "location": "Varna",
+        "price": 100000,
+        "square_footage": 800,
+        "business_type": "General Store"
+    },
+    {
+        "name": "Hill House",
+        "property_type": "House",
+        "location": "Sofia",
+        "price": 500000.500,
+        "square_footage": 4100,
+        "num_of_bedrooms": 5,
+        "num_of_bathrooms": 5,
+        "num_of_floors": 3
+    }
+]
